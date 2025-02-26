@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { ToastContainer, toast } from 'react-toastify';
+import Confetti from 'react-confetti';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FormContainer = styled.div`
   display: flex;
@@ -75,6 +78,7 @@ const BloodDonationForm = () => {
     bloodType: "",
     location: ""
   });
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,7 +91,17 @@ const BloodDonationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    alert("Form submitted successfully!");
+
+    // Trigger success toast and show confetti animation
+    toast.success("Thank you for your donation!", {
+      position: "top-center", // Correct position
+    });
+    setShowConfetti(true);
+
+    // Reset the confetti display after a short delay
+    setTimeout(() => {
+      setShowConfetti(false);
+    }, 5000);
   };
 
   return (
@@ -144,6 +158,12 @@ const BloodDonationForm = () => {
 
         <Button type="submit">Submit</Button>
       </Form>
+
+      {/* Confetti animation */}
+      {showConfetti && <Confetti />}
+      
+      
+      <ToastContainer position="top-center" />
     </FormContainer>
   );
 };
