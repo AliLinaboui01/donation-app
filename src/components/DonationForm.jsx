@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-
 const FormContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('/background.jpg') no-repeat center center/cover;
+  background: url('/13.jpg') no-repeat center center/cover;
   padding: 20px;
 `;
 
@@ -17,20 +16,20 @@ const Form = styled.form`
   padding: 40px 60px;
   text-align: center;
   width: 100%;
-  max-width: 600px;  /* Increased width */
+  max-width: 600px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8px);
 `;
 
 const FormTitle = styled.h2`
-  font-size: 2rem;  /* Increased font size */
+  font-size: 2rem;
   font-weight: bold;
   color: #333;
-  margin-bottom: 32px; /* Added margin for spacing */
+  margin-bottom: 32px;
 `;
 
 const InputLabel = styled.label`
-  font-size: 1.1rem;  /* Increased font size */
+  font-size: 1.1rem;
   color: #333;
   margin-bottom: 8px;
   display: block;
@@ -39,31 +38,31 @@ const InputLabel = styled.label`
 
 const InputField = styled.input`
   width: 100%;
-  padding: 16px 20px; /* Increased padding */
-  border-radius: 10px;  /* Slightly larger border radius */
+  padding: 16px 20px;
+  border-radius: 10px;
   border: 1px solid #ccc;
-  margin-bottom: 24px; /* Increased margin */
-  font-size: 1.1rem;  /* Larger font size */
+  margin-bottom: 24px;
+  font-size: 1.1rem;
 `;
 
 const SelectField = styled.select`
   width: 100%;
-  padding: 16px 20px; /* Increased padding */
-  border-radius: 10px;  /* Slightly larger border radius */
+  padding: 16px 20px;
+  border-radius: 10px;
   border: 1px solid #ccc;
-  margin-bottom: 24px; /* Increased margin */
-  font-size: 1.1rem;  /* Larger font size */
+  margin-bottom: 24px;
+  font-size: 1.1rem;
 `;
 
 const Button = styled.button`
   background: #FF0000;
   color: white;
-  padding: 12px 18px; /* Increased padding */
+  padding: 12px 18px;
   border-radius: 10px;
   width: 100%;
   border: none;
   cursor: pointer;
-  font-size: 1.1rem;  /* Larger font size */
+  font-size: 1.1rem;
   transition: background 0.3s ease;
   &:hover {
     background: #CC0000;
@@ -87,7 +86,6 @@ const BloodDonationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // For now, we log the data
     console.log(formData);
     alert("Form submitted successfully!");
   };

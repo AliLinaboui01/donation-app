@@ -8,10 +8,21 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('/13.jpg') no-repeat center center/cover;
+  position: relative;
   gap: 24px;
   padding: 20px;
   flex-wrap: wrap;
+`;
+
+// Background Image Wrapper
+const BackgroundImage = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 `;
 
 const Card = styled.div`
@@ -61,18 +72,19 @@ const Button = styled.button`
 const ChooseDonate = () => {
   const navigate = useNavigate();  
 
-  
   const handleGetStartedClick = () => {
     navigate("/donation-form"); 
   };
 
-  
   const handleReceiveBloodClick = () => {
     navigate("/list-donations");  
   };
 
   return (
     <Container>
+      {/* Background Image */}
+      <BackgroundImage src="/13.jpg" alt="Background" />
+      
       {/* Card for Donating Blood */}
       <Card>
         <Title>TO DONATE BLOOD</Title>
