@@ -4,7 +4,6 @@ import Confetti from "react-confetti"; // Import Confetti for the celebration ef
 import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
 import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 
-
 // Styled components
 const ListDonationsContainer = styled.div`
   display: flex;
@@ -40,18 +39,17 @@ const SelectField = styled.select`
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 60px;  
+  gap: 60px;
   width: 90%;
   max-width: 1200px;
   justify-items: center;
 `;
 
-
 const DonationCard = styled.div`
   background: rgba(255, 255, 255, 0.9);
-  padding: 30px; /* Increased padding */
+  padding: 30px;
   width: 100%;
-  max-width: 400px; /* Increased max width */
+  max-width: 400px;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8px);
@@ -59,7 +57,7 @@ const DonationCard = styled.div`
   position: relative;
   transition: transform 0.3s ease;
   &:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
+    transform: scale(1.05);
   }
 `;
 
@@ -74,19 +72,18 @@ const DonorName = styled.h3`
 
 const DonorDetails = styled.p`
   font-size: 1rem;
-  color: #444; /* Slightly darker for better readability */
-  margin: 10px 0; /* Increased space between details */
-  line-height: 1.5; /* Improved line spacing */
+  color: #444;
+  margin: 10px 0;
+  line-height: 1.5;
   display: flex;
   align-items: center;
 
   &::before {
-    content: "•"; /* Bullet point before each detail */
-    margin-right: 8px; /* Space between the bullet point and text */
-    color: #ff6347; /* Red color for the bullet point */
+    content: "•";
+    margin-right: 8px;
+    color: #ff6347;
   }
 `;
-
 
 const AvatarStack = styled.div`
   display: flex;
@@ -95,7 +92,7 @@ const AvatarStack = styled.div`
 `;
 
 const Avatar = styled.img`
-  width: 60px;  /* Adjust size */
+  width: 60px;
   height: 60px;
   border-radius: 50%;
   border: 2px solid white;
@@ -167,12 +164,29 @@ const ListDonations = () => {
     setFilteredDonors(filtered);
   }, [bloodTypeFilter, locationFilter, donors]);
 
-  const handleAddButtonClick = () => {
+  const handleAddButtonClick = (donorId) => {
     setShowConfetti(true);
-    toast.success("Thank you, your request has been sent successfully!"); // Show toast message
+    toast.success("Thank you, your request has been sent successfully!"); 
+
+    // Make an API request to add the donor
+    fetch("http://localhost:8080/users/request", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ donorId }), 
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Successfully added donor:", data);
+      })
+      .catch((error) => {
+        console.error("Error adding donor:", error);
+      });
+
     setTimeout(() => {
       setShowConfetti(false);
-    }, 5000); // Hide confetti after 5 seconds
+    }, 5000); 
   };
 
   return (
@@ -223,7 +237,7 @@ const ListDonations = () => {
               <DonorDetails>Email: {donor.email}</DonorDetails>
             </DonorInfo>
             <BottomLeftImage src="/4.png" alt="Image" />
-            <AddButton onClick={handleAddButtonClick}>Add</AddButton>
+            <AddButton onClick={() => handleAddButtonClick(donor.id)}>Add</AddButton>
           </DonationCard>
         ))}
       </GridContainer>
