@@ -221,9 +221,10 @@ const ListDonations = () => {
           <FilterLabel htmlFor="location">Location</FilterLabel>
           <SelectField id="location" value={locationFilter} onChange={(e) => setLocationFilter(e.target.value)}>
             <option value="">All Locations</option>
-            <option value="New York">New York</option>
-            <option value="San Francisco">San Francisco</option>
-            <option value="Los Angeles">Los Angeles</option>
+            <option value="Marrakech">Casablanca</option>
+<option value="Fes">Fes</option>
+<option value="Tangier">Tangier</option>
+<option value="Agadir">Agadir</option>
           </SelectField>
         </div>
       </DonationFilters>
