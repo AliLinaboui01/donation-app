@@ -151,7 +151,7 @@ const LandingPage = () => {
       
       {/* Navbar */}
       <Navbar>
-        <Logo src="/logo.png" alt="App Logo" />
+        <Logo>Logo</Logo>
         <NavbarButtons>
           <ButtonNav>Sign Up</ButtonNav>
         </NavbarButtons>
