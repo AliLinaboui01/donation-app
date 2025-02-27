@@ -132,12 +132,12 @@ const BloodDonationForm = () => {
       setShowConfetti(true);
       setTimeout(() => {
         setShowConfetti(false);
+        navigate("/"); 
       }, 5000);
     } catch (error) {
       console.error('Error:', error);
       toast.error("Registration failed, please try again later.", { position: "top-center" });
     }
-    navigate("/");  
   };
   
   return (

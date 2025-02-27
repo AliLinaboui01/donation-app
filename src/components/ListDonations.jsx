@@ -169,14 +169,14 @@ const ListDonations = () => {
 
   const handleAddButtonClick = (donorId) => {
     setShowConfetti(true);
-    toast.success("Thank you, your request has been sent successfully!"); 
-
+    toast.success("Thank you, your request has been sent successfully!");
+  
     fetch("http://localhost:8080/users/request", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ donorId }), 
+      body: JSON.stringify({ donorId }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -185,12 +185,14 @@ const ListDonations = () => {
       .catch((error) => {
         console.error("Error adding donor:", error);
       });
-
+  
     setTimeout(() => {
       setShowConfetti(false);
-    }, 5000); 
-    navigate("/");  
+      // Delay the navigation after the confetti has been hidden
+      navigate("/"); 
+    }, 5000); // 5-second delay before navigating
   };
+  
 
   return (
     <ListDonationsContainer>
