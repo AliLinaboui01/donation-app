@@ -55,6 +55,31 @@ const SelectField = styled.select`
   border: 1px solid #ccc;
   margin-bottom: 24px;
   font-size: 1.1rem;
+  appearance: none;  /* Removes default dropdown arrow */
+  background-color: white; /* Background color for the select */
+  color: #333; /* Text color */
+  position: relative;
+  cursor: pointer;
+  
+  /* Add a custom arrow to match React-select */
+  &::after {
+    content: '▼'; /* Dropdown arrow symbol */
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+  &:hover {
+    border-color: #999; /* Change border color on hover */
+  }
+
+  &:focus {
+    border-color: #007bff; /* Focus border color */
+    outline: none; /* Remove default focus outline */
+  }
 `;
 
 const Button = styled.button`
@@ -76,7 +101,8 @@ const BloodDonationForm = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     bloodType: "",
-    location: ""
+    location: "",
+    phoneNumber: "", // New field for phone number
   });
   const [showConfetti, setShowConfetti] = useState(false);
 
@@ -92,13 +118,13 @@ const BloodDonationForm = () => {
     e.preventDefault();
     console.log(formData);
 
-    // Trigger success toast and show confetti animation
+   
     toast.success("Thank you for your donation!", {
-      position: "top-center", // Correct position
+      position: "top-center",
     });
     setShowConfetti(true);
 
-    // Reset the confetti display after a short delay
+   
     setTimeout(() => {
       setShowConfetti(false);
     }, 5000);
@@ -156,12 +182,24 @@ const BloodDonationForm = () => {
           />
         </div>
 
+        <div>
+          <InputLabel htmlFor="phoneNumber">Phone Number</InputLabel>
+          <InputField
+            type="text"
+            id="phoneNumber"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            placeholder="Enter your phone number"
+            required
+          />
+        </div>
+
         <Button type="submit">Submit</Button>
       </Form>
 
       {/* Confetti animation */}
       {showConfetti && <Confetti />}
-      
       
       <ToastContainer position="top-center" />
     </FormContainer>

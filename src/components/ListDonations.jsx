@@ -74,19 +74,31 @@ const ListDonations = () => {
   const [bloodTypeFilter, setBloodTypeFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
 
-  // Fetch data from backend
+  // Mock donor data (replace the fetch logic with mock data)
   useEffect(() => {
-    const fetchDonors = async () => {
-      try {
-        const response = await fetch("/api/donors");
-        const data = await response.json();
-        setDonors(data);
-        setFilteredDonors(data); 
-      } catch (error) {
-        console.error("Error fetching donors:", error);
-      }
-    };
-    fetchDonors();
+    const mockData = [
+      {
+        fullName: "John Doe",
+        bloodType: "A+",
+        location: "New York",
+        avatarUrl: "/path/to/avatar1.jpg",
+      },
+      {
+        fullName: "Jane Smith",
+        bloodType: "O-",
+        location: "Los Angeles",
+        avatarUrl: "/path/to/avatar2.jpg",
+      },
+      {
+        fullName: "Alice Johnson",
+        bloodType: "B+",
+        location: "Chicago",
+        avatarUrl: "/path/to/avatar3.jpg",
+      },
+    ];
+
+    setDonors(mockData);
+    setFilteredDonors(mockData); // Initially show all donors
   }, []);
 
   // Handle filter changes
