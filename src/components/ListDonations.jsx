@@ -74,37 +74,20 @@ const ListDonations = () => {
   const [bloodTypeFilter, setBloodTypeFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
 
-  
   useEffect(() => {
-    const mockData = [
-      {
-        fullName: "John Doe",
-        bloodType: "A+",
-        location: "New York",
-        phone: "+1 555-1234",
-        avatarUrl: "/avatar1.jpg",
-      },
-      {
-        fullName: "Jane Smith",
-        bloodType: "O-",
-        location: "Los Angeles",
-        phone: "+1 555-5678",
-        avatarUrl: "/avatar2.jpg",
-      },
-      {
-        fullName: "Alice Johnson",
-        bloodType: "B+",
-        location: "Chicago",
-        phone: "+1 555-8765",
-        avatarUrl: "/avatar2.jpg",
-      },
-    ];
+    const fetchDonors = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/users"); 
+        const data = await response.json();
+        setDonors(data);
+        setFilteredDonors(data); 
+      } catch (error) {
+        console.error("Error fetching donors:", error);
+      }
+    };
 
-    setDonors(mockData);
-    setFilteredDonors(mockData); 
+    fetchDonors();
   }, []);
-
-  // Handle filter changes
   const handleBloodTypeChange = (e) => {
     setBloodTypeFilter(e.target.value);
   };
@@ -113,7 +96,6 @@ const ListDonations = () => {
     setLocationFilter(e.target.value);
   };
 
-  
   useEffect(() => {
     const filtered = donors.filter((donor) => {
       const matchesBloodType =
