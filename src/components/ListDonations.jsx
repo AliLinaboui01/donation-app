@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { FaHome } from "react-icons/fa"; // Importing the home icon from react-icons
 
 // Styled components
 const ListDonationsContainer = styled.div`
@@ -52,7 +51,7 @@ const DonationCard = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8px);
   text-align: center;
-  position: relative; /* This is important for absolute positioning */
+  position: relative;
 `;
 
 const DonorInfo = styled.div`
@@ -68,17 +67,8 @@ const DonorDetails = styled.p`
   font-size: 1rem;
   color: #666;
   margin: 5px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
-const IconWrapper = styled.div`
-  margin-right: 8px; /* Space between icon and text */
-  color: #007bff; /* Icon color */
-`;
-
-// Avatar Stack Styles
 const AvatarStack = styled.div`
   display: flex;
   justify-content: center;
@@ -86,24 +76,49 @@ const AvatarStack = styled.div`
 `;
 
 const Avatar = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 60px;  /* Adjust size */
+  height: 60px;
   border-radius: 50%;
   border: 2px solid white;
   object-fit: cover;
-  margin-left: -10px;
-  &:first-child {
-    margin-left: 0;
-  }
 `;
+const DonorHeader = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 
 const BottomLeftImage = styled.img`
   position: absolute;
   bottom: 10px;
   left: 10px;
-  width: 50px; /* Adjust the size of the image */
-  height: 50px; /* Adjust the size of the image */
+  width: 50px;
+  height: 50px;
   object-fit: cover;
+`;
+
+
+const AddButton = styled.button`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #ff6347;
+  color: white;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #ff4500;
+  }
 `;
 
 const ListDonations = () => {
@@ -113,17 +128,14 @@ const ListDonations = () => {
   const [locationFilter, setLocationFilter] = useState("");
 
   useEffect(() => {
-    const fetchDonors = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/users");
-        const data = await response.json();
+    // Replace with your actual API endpoint
+    fetch("http://localhost:8080/users")
+      .then((response) => response.json())
+      .then((data) => {
         setDonors(data);
         setFilteredDonors(data);
-      } catch (error) {
-        console.error("Error fetching donors:", error);
-      }
-    };
-    fetchDonors();
+      })
+      .catch((error) => console.error("Error fetching donors:", error));
   }, []);
 
   useEffect(() => {
@@ -157,10 +169,8 @@ const ListDonations = () => {
           <SelectField id="location" value={locationFilter} onChange={(e) => setLocationFilter(e.target.value)}>
             <option value="">All Locations</option>
             <option value="New York">New York</option>
-            <option value="Los Angeles">Los Angeles</option>
-            <option value="Chicago">Chicago</option>
-            <option value="Miami">Miami</option>
             <option value="San Francisco">San Francisco</option>
+            <option value="Los Angeles">Los Angeles</option>
           </SelectField>
         </div>
       </DonationFilters>
@@ -169,26 +179,25 @@ const ListDonations = () => {
         {filteredDonors.length > 0 ? (
           filteredDonors.map((donor, index) => (
             <DonationCard key={index}>
+              <DonorHeader>
+                <Avatar src="/avatar1.jpg" alt={donor.fullName} />
+              </DonorHeader>
               <DonorInfo>
                 <DonorName>{donor.fullName}</DonorName>
-                <DonorDetails>
-                  <IconWrapper>
-                    <FaHome />
-                  </IconWrapper>
-                  Location: {donor.location}
-                </DonorDetails>
                 <DonorDetails>Blood Type: {donor.bloodType}</DonorDetails>
+                <DonorDetails>Location: {donor.location}</DonorDetails>
                 <DonorDetails>Phone: {donor.phone}</DonorDetails>
                 <DonorDetails>Email: {donor.email}</DonorDetails>
               </DonorInfo>
-              <AvatarStack>
-                <Avatar src={"/avatart1.jpg"} alt={donor.fullName} />
-              </AvatarStack>
               <BottomLeftImage src="/4.png" alt="Image" />
+              <AddButton onClick={() => alert("Add action")}>Add</AddButton>
             </DonationCard>
           ))
         ) : (
+          <div>
+          <span>  </span>
           <p>No donors found matching your filters.</p>
+          </div>
         )}
       </GridContainer>
     </ListDonationsContainer>
