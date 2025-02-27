@@ -176,26 +176,22 @@ const ListDonations = () => {
       </DonationFilters>
 
       <GridContainer>
-        {filteredDonors.length > 0 ? (
-          filteredDonors.map((donor, index) => (
-            <DonationCard key={index}>
-              <DonorHeader>
-                <Avatar src="/avatar1.jpg" alt={donor.fullName} />
-              </DonorHeader>
-              <DonorInfo>
-                <DonorName>{donor.fullName}</DonorName>
-                <DonorDetails>Blood Type: {donor.type}</DonorDetails>
-                <DonorDetails>Location: {donor.location}</DonorDetails>
-                <DonorDetails>Phone: {donor.phoneNumber}</DonorDetails>
-                <DonorDetails>Email: {donor.email}</DonorDetails>
-              </DonorInfo>
-              <BottomLeftImage src="/4.png" alt="Image" />
-              <AddButton onClick={() => alert("Add action")}>Add</AddButton>
-            </DonationCard>
-          ))
-        ) : (
-          <p>No donors found matching your filters.</p>
-        )}
+        {filteredDonors.map((donor, index) => (
+          <DonationCard key={index}>
+            <DonorHeader>
+              <Avatar src="/avatar1.jpg" alt={donor.fullName} />
+            </DonorHeader>
+            <DonorInfo>
+              <DonorName>{donor.fullName}</DonorName>
+              <DonorDetails>Blood Type: {donor.type}</DonorDetails>
+              <DonorDetails>Location: {donor.location}</DonorDetails>
+              <DonorDetails>Phone: {donor.phoneNumber}</DonorDetails>
+              <DonorDetails>Email: {donor.email}</DonorDetails>
+            </DonorInfo>
+            <BottomLeftImage src="/4.png" alt="Image" />
+            <AddButton onClick={() => alert("Add action")}>Add</AddButton>
+          </DonationCard>
+        ))}
       </GridContainer>
     </ListDonationsContainer>
   );

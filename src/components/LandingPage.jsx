@@ -13,6 +13,11 @@ const LandingContainer = styled.div`
   justify-content: center;
   background: rgba(0, 0, 0, 0.7);
 `;
+const Logo = styled.img`
+  width: 120px; /* Adjust the size of the logo */
+  height: auto;
+`;
+
 
 const LandingImage = styled.img`
   position: absolute;
@@ -114,13 +119,6 @@ const Navbar = styled.nav`
   z-index: 2;
 `;
 
-const Logo = styled.div`
-  font-size: 1.5rem;
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-`;
-
 const NavbarButtons = styled.div`
   display: flex;
   justify-content: space-between;
@@ -151,7 +149,7 @@ const LandingPage = () => {
       
       {/* Navbar */}
       <Navbar>
-        <Logo></Logo>
+      <Logo src="/logo.png" alt="Logo"/>
         <NavbarButtons>
           <ButtonNav>Sign Up</ButtonNav>
         </NavbarButtons>

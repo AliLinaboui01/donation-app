@@ -14,7 +14,6 @@ const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-// Background Image Wrapper
 const BackgroundImage = styled.img`
   position: absolute;
   top: 0;
@@ -69,6 +68,18 @@ const Button = styled.button`
   }
 `;
 
+const LogoContainer = styled.div`
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+`;
+
+const Logo = styled.img`
+  width: 120px; /* Adjust the size of the logo */
+  height: auto;
+`;
+
 const ChooseDonate = () => {
   const navigate = useNavigate();  
 
@@ -82,13 +93,17 @@ const ChooseDonate = () => {
 
   return (
     <Container>
+      {/* Logo */}
+      <LogoContainer>
+        <Logo src="/logo.png" alt="Logo" />
+      </LogoContainer>
+
       <BackgroundImage src="/13.jpg" alt="Background" />
       <Card>
         <Title>TO DONATE BLOOD</Title>
         <Description>Proceed to update your profile</Description>
         <Button onClick={handleGetStartedClick}>GET STARTED</Button> 
       </Card>
-      {/* Card for Receiving Blood */}
       <Card>
         <Title>LOOKING TO RECEIVE BLOOD?</Title>
         <Description>Proceed & find your match</Description>
