@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { FaHome } from "react-icons/fa"; // Importing the home icon from react-icons
 
 // Styled components
 const ListDonationsContainer = styled.div`
@@ -67,6 +68,14 @@ const DonorDetails = styled.p`
   font-size: 1rem;
   color: #666;
   margin: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const IconWrapper = styled.div`
+  margin-right: 8px; /* Space between icon and text */
+  color: #007bff; /* Icon color */
 `;
 
 // Avatar Stack Styles
@@ -88,7 +97,6 @@ const Avatar = styled.img`
   }
 `;
 
-// Bottom-left image for each card
 const BottomLeftImage = styled.img`
   position: absolute;
   bottom: 10px;
@@ -163,8 +171,13 @@ const ListDonations = () => {
             <DonationCard key={index}>
               <DonorInfo>
                 <DonorName>{donor.fullName}</DonorName>
+                <DonorDetails>
+                  <IconWrapper>
+                    <FaHome />
+                  </IconWrapper>
+                  Location: {donor.location}
+                </DonorDetails>
                 <DonorDetails>Blood Type: {donor.bloodType}</DonorDetails>
-                <DonorDetails>Location: {donor.location}</DonorDetails>
                 <DonorDetails>Phone: {donor.phone}</DonorDetails>
                 <DonorDetails>Email: {donor.email}</DonorDetails>
               </DonorInfo>
