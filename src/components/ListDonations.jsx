@@ -171,7 +171,7 @@ const ListDonations = () => {
     setShowConfetti(true);
     toast.success("Thank you, your request has been sent successfully!");
   
-    fetch("http://localhost:8080/users/request", {
+    fetch("http://localhost:8080/users/request/{id}", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
