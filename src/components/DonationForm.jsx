@@ -104,35 +104,37 @@ const BloodDonationForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    toast.success("Thank you for your donation!", {
-      position: "top-center",
-    });
-    setShowConfetti(true);
-    // Send the form data to the API
+    setShowConfetti(false); // Ensure confetti resets
+  
     try {
       const response = await fetch('http://localhost:8080/users/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData), // Sending the form data
+        body: JSON.stringify(formData), 
       });
-      // Handle the response from the server
+  
       if (!response.ok) {
         throw new Error('Failed to register');
       }
+  
       const data = await response.json();
       console.log('Registration successful:', data);
+  
+      // Show success toast only on success
+      toast.success("Thank you for your donation!", { position: "top-center" });
+  
+      setShowConfetti(true);
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 5000);
     } catch (error) {
       console.error('Error:', error);
-      toast.error("Registration failed, please try again later.");
+      toast.error("Registration failed, please try again later.", { position: "top-center" });
     }
-    // Reset the confetti display after a short delay
-    setTimeout(() => {
-      setShowConfetti(false);
-    }, 5000);
   };
+  
   return (
     <FormContainer>
       <Form onSubmit={handleSubmit}>
