@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Confetti from "react-confetti"; // Import Confetti for the celebration effect
 import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
 import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
+import { useNavigate } from "react-router-dom"; 
 
 // Styled components
 const ListDonationsContainer = styled.div`
@@ -39,7 +40,7 @@ const SelectField = styled.select`
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 60px;
+  gap: 80px;
   width: 90%;
   max-width: 1200px;
   justify-items: center;
@@ -142,6 +143,8 @@ const ListDonations = () => {
   const [bloodTypeFilter, setBloodTypeFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const [showConfetti, setShowConfetti] = useState(false);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetch("http://localhost:8080/users")
@@ -168,7 +171,6 @@ const ListDonations = () => {
     setShowConfetti(true);
     toast.success("Thank you, your request has been sent successfully!"); 
 
-    // Make an API request to add the donor
     fetch("http://localhost:8080/users/request", {
       method: "POST",
       headers: {
@@ -187,6 +189,7 @@ const ListDonations = () => {
     setTimeout(() => {
       setShowConfetti(false);
     }, 5000); 
+    navigate("/");  
   };
 
   return (
@@ -237,7 +240,7 @@ const ListDonations = () => {
               <DonorDetails>Email: {donor.email}</DonorDetails>
             </DonorInfo>
             <BottomLeftImage src="/4.png" alt="Image" />
-            <AddButton onClick={() => handleAddButtonClick(donor.id)}>Add</AddButton>
+            <AddButton onClick={() => handleAddButtonClick(donor.email)}>Add</AddButton>
           </DonationCard>
         ))}
       </GridContainer>

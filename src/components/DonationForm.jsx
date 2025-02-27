@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { ToastContainer, toast } from 'react-toastify';
 import Confetti from 'react-confetti';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom"; 
+
 const FormContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -95,6 +97,8 @@ const BloodDonationForm = () => {
     email:"",
   });
   const [showConfetti, setShowConfetti] = useState(false);
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -133,6 +137,7 @@ const BloodDonationForm = () => {
       console.error('Error:', error);
       toast.error("Registration failed, please try again later.", { position: "top-center" });
     }
+    navigate("/");  
   };
   
   return (
