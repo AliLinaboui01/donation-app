@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Confetti from "react-confetti"; // Import Confetti for the celebration effect
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
+
 
 // Styled components
 const ListDonationsContainer = styled.div`
@@ -36,22 +40,27 @@ const SelectField = styled.select`
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 60px;  
   width: 90%;
   max-width: 1200px;
   justify-items: center;
 `;
 
+
 const DonationCard = styled.div`
   background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
+  padding: 30px; /* Increased padding */
   width: 100%;
-  max-width: 300px;
+  max-width: 400px; /* Increased max width */
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8px);
   text-align: center;
   position: relative;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
 `;
 
 const DonorInfo = styled.div`
@@ -65,9 +74,19 @@ const DonorName = styled.h3`
 
 const DonorDetails = styled.p`
   font-size: 1rem;
-  color: #666;
-  margin: 5px 0;
+  color: #444; /* Slightly darker for better readability */
+  margin: 10px 0; /* Increased space between details */
+  line-height: 1.5; /* Improved line spacing */
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: "•"; /* Bullet point before each detail */
+    margin-right: 8px; /* Space between the bullet point and text */
+    color: #ff6347; /* Red color for the bullet point */
+  }
 `;
+
 
 const AvatarStack = styled.div`
   display: flex;
@@ -125,6 +144,7 @@ const ListDonations = () => {
   const [filteredDonors, setFilteredDonors] = useState([]);
   const [bloodTypeFilter, setBloodTypeFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
+  const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8080/users")
@@ -147,8 +167,22 @@ const ListDonations = () => {
     setFilteredDonors(filtered);
   }, [bloodTypeFilter, locationFilter, donors]);
 
+  const handleAddButtonClick = () => {
+    setShowConfetti(true);
+    toast.success("Thank you, your request has been sent successfully!"); // Show toast message
+    setTimeout(() => {
+      setShowConfetti(false);
+    }, 5000); // Hide confetti after 5 seconds
+  };
+
   return (
     <ListDonationsContainer>
+      {/* Confetti effect */}
+      {showConfetti && <Confetti />}
+
+      {/* Success Toast */}
+      <ToastContainer />
+
       <DonationFilters>
         <div>
           <FilterLabel htmlFor="bloodType">Blood Type</FilterLabel>
@@ -189,7 +223,7 @@ const ListDonations = () => {
               <DonorDetails>Email: {donor.email}</DonorDetails>
             </DonorInfo>
             <BottomLeftImage src="/4.png" alt="Image" />
-            <AddButton onClick={() => alert("Add action")}>Add</AddButton>
+            <AddButton onClick={handleAddButtonClick}>Add</AddButton>
           </DonationCard>
         ))}
       </GridContainer>
