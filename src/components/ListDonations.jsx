@@ -167,7 +167,7 @@ const ListDonations = () => {
     setFilteredDonors(filtered);
   }, [bloodTypeFilter, locationFilter, donors]);
 
-  const handleAddButtonClick = (donorId) => {
+  const handleAddButtonClick = (id) => {
     setShowConfetti(true);
     toast.success("Thank you, your request has been sent successfully!");
   
