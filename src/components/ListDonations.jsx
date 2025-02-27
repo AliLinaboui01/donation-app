@@ -149,12 +149,13 @@ const ListDonations = () => {
         filteredDonors.map((donor, index) => (
           <DonationCard key={index}>
             {/* Avatar */}
-            <DonorAvatar src={donor.avatarUrl} alt={donor.fullName} />
+            {/* <DonorAvatar src={donor.avatarUrl} alt={donor.fullName} /> */}
             <DonorInfo>
               <DonorName>{donor.fullName}</DonorName>
-              <DonorDetails>Blood Type: {donor.bloodType}</DonorDetails>
+              <DonorDetails>Blood Type: {donor.type}</DonorDetails>
               <DonorDetails>Location: {donor.location}</DonorDetails>
               <DonorDetails>Phone: {donor.phone}</DonorDetails> 
+              <DonorDetails>Email: {donor.email}</DonorDetails> 
             </DonorInfo>
           </DonationCard>
         ))
