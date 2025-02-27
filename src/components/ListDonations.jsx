@@ -82,6 +82,7 @@ const Avatar = styled.img`
   border: 2px solid white;
   object-fit: cover;
 `;
+
 const DonorHeader = styled.div`
   position: absolute;
   top: 10px;
@@ -91,7 +92,6 @@ const DonorHeader = styled.div`
   gap: 10px;
 `;
 
-
 const BottomLeftImage = styled.img`
   position: absolute;
   bottom: 10px;
@@ -100,7 +100,6 @@ const BottomLeftImage = styled.img`
   height: 50px;
   object-fit: cover;
 `;
-
 
 const AddButton = styled.button`
   position: absolute;
@@ -128,14 +127,15 @@ const ListDonations = () => {
   const [locationFilter, setLocationFilter] = useState("");
 
   useEffect(() => {
-    // Replace with your actual API endpoint
     fetch("http://localhost:8080/users")
       .then((response) => response.json())
       .then((data) => {
         setDonors(data);
         setFilteredDonors(data);
       })
-      .catch((error) => console.error("Error fetching donors:", error));
+      .catch(() => {
+        console.warn("API request failed.");
+      });
   }, []);
 
   useEffect(() => {
@@ -184,9 +184,9 @@ const ListDonations = () => {
               </DonorHeader>
               <DonorInfo>
                 <DonorName>{donor.fullName}</DonorName>
-                <DonorDetails>Blood Type: {donor.bloodType}</DonorDetails>
+                <DonorDetails>Blood Type: {donor.type}</DonorDetails>
                 <DonorDetails>Location: {donor.location}</DonorDetails>
-                <DonorDetails>Phone: {donor.phone}</DonorDetails>
+                <DonorDetails>Phone: {donor.phoneNumber}</DonorDetails>
                 <DonorDetails>Email: {donor.email}</DonorDetails>
               </DonorInfo>
               <BottomLeftImage src="/4.png" alt="Image" />
@@ -194,10 +194,7 @@ const ListDonations = () => {
             </DonationCard>
           ))
         ) : (
-          <div>
-          <span>  </span>
           <p>No donors found matching your filters.</p>
-          </div>
         )}
       </GridContainer>
     </ListDonationsContainer>
