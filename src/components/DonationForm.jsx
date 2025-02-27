@@ -150,10 +150,10 @@ const BloodDonationForm = () => {
           />
         </div>
         <div>
-          <InputLabel htmlFor="bloodType">Type of Blood</InputLabel>
+          <InputLabel htmlFor="type">Type of Blood</InputLabel>
           <SelectField
             id="type"
-            name="bloodType"
+            name="type"
             value={formData.type}
             onChange={handleChange}
             required
@@ -194,7 +194,7 @@ const BloodDonationForm = () => {
           />
         </div>
         <div>
-          <InputLabel htmlFor="Email">Phone Number</InputLabel>
+          <InputLabel htmlFor="Email">Email</InputLabel>
           <InputField
             type="text"
             id="email"
