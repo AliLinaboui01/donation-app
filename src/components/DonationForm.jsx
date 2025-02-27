@@ -102,7 +102,7 @@ const BloodDonationForm = () => {
     fullName: "",
     bloodType: "",
     location: "",
-    phoneNumber: "", // New field for phone number
+    phoneNumber: "", 
   });
   const [showConfetti, setShowConfetti] = useState(false);
 
@@ -114,21 +114,46 @@ const BloodDonationForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-
-   
+  
+    
     toast.success("Thank you for your donation!", {
-      position: "top-center",
+      position: "top-center", 
     });
     setShowConfetti(true);
-
-   
+  
+    // Send the form data to the API 
+    /*
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData), // Sending the form data
+      });
+  
+      // Handle the response from the server
+      if (!response.ok) {
+        throw new Error('Failed to register');
+      }
+  
+      const data = await response.json();
+      console.log('Registration successful:', data);
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error("Registration failed, please try again later.");
+    }
+    */
+  
+    // Reset the confetti display after a short delay
     setTimeout(() => {
       setShowConfetti(false);
     }, 5000);
   };
+  
 
   return (
     <FormContainer>
