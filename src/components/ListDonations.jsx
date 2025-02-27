@@ -8,9 +8,9 @@ const ListDonationsContainer = styled.div`
   align-items: center;
   padding: 40px 20px;
   background-image: url("/14.jpg"); 
-  background-size: cover;  /* Ensures the background covers the entire container */
-  background-position: center; /* Centers the background image */
-  min-height: 100vh; /* Ensures the container takes up at least the full height of the screen */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
 `;
 
 const DonationFilters = styled.div`
@@ -74,19 +74,34 @@ const ListDonations = () => {
   const [bloodTypeFilter, setBloodTypeFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
 
-  // Fetch data from backend
+  
   useEffect(() => {
-    const fetchDonors = async () => {
-      try {
-        const response = await fetch("/api/donors");
-        const data = await response.json();
-        setDonors(data);
-        setFilteredDonors(data); 
-      } catch (error) {
-        console.error("Error fetching donors:", error);
-      }
-    };
-    fetchDonors();
+    const mockData = [
+      {
+        fullName: "John Doe",
+        bloodType: "A+",
+        location: "New York",
+        phone: "+1 555-1234",
+        avatarUrl: "/avatar1.jpg",
+      },
+      {
+        fullName: "Jane Smith",
+        bloodType: "O-",
+        location: "Los Angeles",
+        phone: "+1 555-5678",
+        avatarUrl: "/avatar2.jpg",
+      },
+      {
+        fullName: "Alice Johnson",
+        bloodType: "B+",
+        location: "Chicago",
+        phone: "+1 555-8765",
+        avatarUrl: "/avatar2.jpg",
+      },
+    ];
+
+    setDonors(mockData);
+    setFilteredDonors(mockData); 
   }, []);
 
   // Handle filter changes
@@ -98,7 +113,7 @@ const ListDonations = () => {
     setLocationFilter(e.target.value);
   };
 
-  // Filter donors based on selected filters
+  
   useEffect(() => {
     const filtered = donors.filter((donor) => {
       const matchesBloodType =
@@ -157,6 +172,7 @@ const ListDonations = () => {
               <DonorName>{donor.fullName}</DonorName>
               <DonorDetails>Blood Type: {donor.bloodType}</DonorDetails>
               <DonorDetails>Location: {donor.location}</DonorDetails>
+              <DonorDetails>Phone: {donor.phone}</DonorDetails> 
             </DonorInfo>
           </DonationCard>
         ))
