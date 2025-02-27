@@ -104,7 +104,7 @@ const BloodDonationForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowConfetti(false); // Ensure confetti resets
+    setShowConfetti(false); 
   
     try {
       const response = await fetch('http://localhost:8080/users/add', {
