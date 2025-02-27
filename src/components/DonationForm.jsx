@@ -111,7 +111,7 @@ const BloodDonationForm = () => {
     setShowConfetti(true);
     // Send the form data to the API
     try {
-      const response = await fetch('http://localhost:8080/users', {
+      const response = await fetch('http://localhost:8080/users/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
