@@ -82,10 +82,7 @@ const ChooseDonate = () => {
 
   return (
     <Container>
-      {/* Background Image */}
       <BackgroundImage src="/13.jpg" alt="Background" />
-      
-      {/* Card for Donating Blood */}
       <Card>
         <Title>TO DONATE BLOOD</Title>
         <Description>Proceed to update your profile</Description>
