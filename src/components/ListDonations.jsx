@@ -172,7 +172,7 @@ const ListDonations = () => {
     toast.success("Thank you, your request has been sent successfully!");
   
     fetch("http://localhost:8080/users/request", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
@@ -242,7 +242,7 @@ const ListDonations = () => {
               <DonorDetails>Email: {donor.email}</DonorDetails>
             </DonorInfo>
             <BottomLeftImage src="/4.png" alt="Image" />
-            <AddButton onClick={() => handleAddButtonClick(donor.email)}>Add</AddButton>
+            <AddButton onClick={() => handleAddButtonClick(donor.id)}>Add</AddButton>
           </DonationCard>
         ))}
       </GridContainer>
